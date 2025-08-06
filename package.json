@@ -8,9 +8,6 @@
     "type": "git",
     "url": "https://github.com/Anirudh12345678/nse-mcp"
   },
-  "files": [
-    "README.md"
-  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js & echo $! > .pidfile",
