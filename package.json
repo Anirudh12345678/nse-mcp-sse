@@ -1,0 +1,28 @@
+{
+  "name": "nse-mcp",
+  "version": "2.3.3",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Anirudh12345678/nse-mcp"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js & echo $! > .pidfile",
+    "test": "(mcp-cli call get_price '{\"symbol\": \"INFY\"}' | npm start) > server.log 2>&1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "stock-nse-india": "^1.2.1",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10"
+  }
+}
