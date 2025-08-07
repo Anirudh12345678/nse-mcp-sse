@@ -28,7 +28,6 @@ async function get_price({ symbol }: { symbol: string }): Promise<{ content: Con
 async function get_trend({ symbol, days }: { symbol: string; days?: number | undefined }): Promise<{ content: ContentPart[] }> {
   const end = new Date();
   const start = new Date(end.getTime() - (days || 30) * 24 * 60 * 60 * 1000);
-
   const history = await nse.getEquityHistoricalData(symbol, { start, end });
 
   if (!history || history.length === 0) {
@@ -43,7 +42,7 @@ async function get_trend({ symbol, days }: { symbol: string; days?: number | und
   }
 
   const startPrice = history[0]?.data[0]?.CH_CLOSING_PRICE;
-  const endPrice = history.at(-1)?.data[0]?.CH_CLOSING_PRICE;
+  const endPrice = history[0]?.data.at(-1)?.CH_CLOSING_PRICE;
   if (startPrice === undefined || endPrice === undefined) {
     return {
       content: [
@@ -72,7 +71,7 @@ async function get_trend({ symbol, days }: { symbol: string; days?: number | und
 }
 
 async function should_i_buy({ symbol }: { symbol: string }): Promise<{ content: ContentPart[] }> {
-  const trendResponse = await get_trend({ symbol });
+  const trendResponse = await get_trend({ symbol, days: 365 });
   let advice = "neutral";
   let reason = "";
 
